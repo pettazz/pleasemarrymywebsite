@@ -12,16 +12,12 @@
     exit();
   }
 
-  $page = 'league';
+  $page = 'scoring';
 
   require('body_top.php');
 ?>
 
-      <h2>League Standings</h2>
-
-      <table class="table table-striped">
-
-      </table>
+      <h2>Scoring</h2>
 
 <?php
   require('body_bottom.php');

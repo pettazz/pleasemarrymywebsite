@@ -12,12 +12,10 @@
     exit();
   }
 
-  $page = 'league';
+  $page = 'teams';
 
   require('body_top.php');
 ?>
-
-      <h2>League Standings</h2>
 
       <table class="table table-striped">
 

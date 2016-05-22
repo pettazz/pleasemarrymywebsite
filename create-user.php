@@ -64,34 +64,25 @@
 
     <div class="container">
 
-      <form class="form-signin" action="login-handler.php" method="POST">
-        <h2 class="form-signin-heading">Please sign in</h2>
+      <form class="form-signin" action="create-login-handler.php" method="POST">
+        <h2 class="form-signin-heading">Create user</h2>
         <?php
-          switch($redirectReason){
-            case 'no-login':
-        ?>
-        <div class="alert alert-info alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <strong>C'mon</strong> You know you gotta be logged in to do that
-        </div>
-        <?php
-              break;
-            case 'failed-login':
+            if(isset($failed) && $failed){
         ?>
         <div class="alert alert-danger alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <strong>Oh dip!</strong> Couldn't log you in with those details.
+          <strong>Oh dip!</strong> Couldn't create a user with those details.
         </div>
         <?php
-              break;
-          }
+            }
         ?>
 
         <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" required autofocus>
+        <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" required autofocus><label for="inputUsername" class="sr-only">Username</label>
+        <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
       </form>
 
     </div> <!-- /container -->
