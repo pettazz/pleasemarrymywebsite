@@ -12,10 +12,18 @@
     exit();
   }
 
-  $page = 'league';
+  require('Bach.php');
+  $brain = new Bach($JACKED);
 
+  $page = 'league';
   require('body_top.php');
+
+  $ep = $brain->getCurrentEpisode();
 ?>
+      <div class="jumbotron">
+        <h1>WEEK <?php echo $ep->id; ?></h1>
+        <p><?php echo date('l, d M Y g:i A', $ep->startTime); ?></p>
+      </div>
 
       <h2>League Standings</h2>
 
