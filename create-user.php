@@ -64,7 +64,7 @@
 
     <div class="container">
 
-      <form class="form-signin" action="create-login-handler.php" method="POST">
+      <form class="form-signin" action="create-user-handler.php" method="POST">
         <h2 class="form-signin-heading">Create user</h2>
         <?php
             if(isset($failed) && $failed){
@@ -78,8 +78,9 @@
         ?>
 
         <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" required autofocus><label for="inputUsername" class="sr-only">Username</label>
-        <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
+        <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
