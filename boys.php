@@ -13,14 +13,47 @@
   }
 
   $page = 'boys';
-
   require('body_top.php');
+
+  require('Bach.php');
+  $brain = new Bach($JACKED);
+
+  $contestants = $brain->getContestants();
+
 ?>
 
-      <table class="table table-striped">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Score</th>
+            <th>Alive</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+            foreach($contestants as $contestantData){
+              $contestant = $contestantData['contestant'];
+              $score = $contestantData['score'];
+          ?>
 
+          <tr class="contestant-link" data-contestant-id="<?php echo $contestant->uuid; ?>">
+            <td><?php echo $contestant->name; ?></td>
+            <td><?php echo $score; ?></td>
+            <td><?php echo ($contestant->alive > 0)? 'YUP' : 'NAW'; ?></td>
+          </tr>
+          <?php
+            }
+          ?>
+
+        </tbody>
       </table>
 
 <?php
+
+  $jsFooter = '
+        $(\'tr.contestant-link\').click(function(){
+          document.location = \'boy-detail.php?boy=\' + $(this).data(\'contestant-id\');
+        });';
   require('body_bottom.php');
 ?>
