@@ -12,7 +12,7 @@
     exit();
   }
 
-  $page = 'teams';
+  $page = 'team';
 
   require('body_top.php');
 ?>
