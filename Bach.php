@@ -62,6 +62,50 @@
       return $this->jacked->Syrup->Score->find(array('Contestant' => $contestant));
     }
 
+
+
+    public function getTeams($ordered = 'alpha'){
+      $res = array();
+      $teams = $this->jacked->Syrup->Team->find();
+      foreach($teams as $team){
+        $score = $this->getScoreForTeam($team->uuid);
+        $res[$team->uuid] = array('team' => $team, 'score' => $score);
+      }
+
+      if($ordered == 'rank'){
+        usort($res, function($a, $b){
+          if($a['score'] < $b['score']){
+            return -1;
+          }else if($a['score'] > $b['score']){
+            return 0;
+          }else{
+            return 1;
+          }
+        });
+      }
+
+      return $res;
+    }
+
+    public function getScoreForTeam($team){
+      $query = "SELECT SUM(Action.value) AS score FROM Ownership, Action, Score WHERE 
+        Ownership.Team = '" . $team . "' AND
+        Score.Contestant = Ownership.Contestant AND
+        Score.episode = Ownership.episode AND
+        Action.uuid = Score.Action";
+
+      $result = $this->jacked->MySQL->query($query);
+      if($result){
+        if($result[0]['score'] > 0){
+          return $result[0]['score'];
+        }else{
+          return 0;
+        }
+      }else{
+        return 0;
+      }
+    }
+
   }
 
 ?>
