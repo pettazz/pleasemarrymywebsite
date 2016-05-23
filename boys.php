@@ -18,7 +18,7 @@
   require('Bach.php');
   $brain = new Bach($JACKED);
 
-  $contestants = $brain->getContestants();
+  $contestants = $brain->getContestants('rank');
 
 ?>
 
