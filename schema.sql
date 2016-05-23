@@ -34,11 +34,10 @@ CREATE TABLE `Ownership` (
 
 -- Create syntax for TABLE 'Score'
 CREATE TABLE `Score` (
-  `Boy` varchar(64) NOT NULL DEFAULT '',
+  `Contestant` varchar(64) NOT NULL DEFAULT '',
   `Action` varchar(64) NOT NULL DEFAULT '',
   `episode` int(2) unsigned NOT NULL,
-  `Scorer` varchar(64) NOT NULL DEFAULT '',
-  PRIMARY KEY (`Boy`)
+  `Scorer` varchar(64) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Create syntax for TABLE 'Team'
