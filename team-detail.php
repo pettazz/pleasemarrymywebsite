@@ -13,7 +13,7 @@
   }
 
   $teamID = $_GET['team'];
-  $team = $JACKED->Syrup->Team->findOne(array('uuid' => $contestantID));
+  $team = $JACKED->Syrup->Team->findOne(array('uuid' => $teamID));
   if(!$team){
     header("Location: league.php");
   }
@@ -38,7 +38,7 @@
       <h3>Weeks</h3>
 
       <?php 
-        $weekidx = $currentWeek;
+        $weekidx = $currentWeek->id;
         while($weekidx > 0){ 
           $weekOwnerships = $JACKED->Syrup->Ownership->find(array('AND' => array('Team' => $team->uuid, 'episode' => $weekidx)));
           $weekScore = $brain->getScoreForTeamByEpisode($team->uuid, $weekidx);
@@ -59,17 +59,25 @@
             foreach($weekOwnerships as $week){
           ?>
 
-          <tr>
-            <td><?php echo $week->contestant->name; ?></td>
-            <td><?php echo $brain->getScoreForContestantByEpisode($week->contestant->uuid, $weekidx); ?></td>
+          <tr class="contestant-link clickable" data-contestant-id="<?php echo $week->Contestant->uuid; ?>">
+            <td><?php echo $week->Contestant->name; ?></td>
+            <td><?php echo $brain->getScoreForContestantByEpisode($week->Contestant->uuid, $weekidx); ?></td>
           </tr>
-          <?php
+        <?php
             }
-          ?>
-
+        ?>
         </tbody>
       </table>
+        <?php
+            $weekidx--;
+          }
+        ?>
+
 
 <?php
+  $jsFooter = '
+        $(\'tr.contestant-link\').click(function(){
+          document.location = \'boy-detail.php?boy=\' + $(this).data(\'contestant-id\');
+        });';
   require('body_bottom.php');
 ?>
