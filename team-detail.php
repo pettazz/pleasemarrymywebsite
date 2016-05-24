@@ -17,7 +17,7 @@
   if(!$team){
     header("Location: league.php");
   }
-  
+
   $me = $JACKED->Flock->getUserSession();
   if($team->Owner->guid == $me['userid']){
     header("Location: team.php");
@@ -39,19 +39,16 @@
         <p>Total Score: <?php echo $total; ?></p>
       </div>
 
-
-      <h3>Weeks</h3>
-
       <?php 
         $weekidx = $currentWeek->id;
         while($weekidx > 0){ 
           $weekOwnerships = $JACKED->Syrup->Ownership->find(array('AND' => array('Team' => $team->uuid, 'episode' => $weekidx)));
           $weekScore = $brain->getScoreForTeamByEpisode($team->uuid, $weekidx);
       ?>
-      <h4>
+      <h3>
         Week <?php echo $weekidx; ?><br />
-        Score: <?php echo $weekScore; ?>
-      </h4>
+        <small>Score: <?php echo $weekScore; ?></small>
+      </h3>
       <table class="table table-striped table-hover">
         <thead>
           <tr>
