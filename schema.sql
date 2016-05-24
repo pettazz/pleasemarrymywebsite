@@ -29,7 +29,7 @@ CREATE TABLE `Ownership` (
   `Team` varchar(64) NOT NULL DEFAULT '',
   `Contestant` varchar(64) NOT NULL DEFAULT '',
   `episode` int(2) unsigned NOT NULL,
-  PRIMARY KEY (`Team`)
+  PRIMARY KEY (`Team`,`Contestant`,`episode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Create syntax for TABLE 'Score'
