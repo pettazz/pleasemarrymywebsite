@@ -12,7 +12,7 @@
       <form class="form-signin" action="create-score-handler.php" method="POST">
         <h2 class="form-signin-heading">Add Score</h2>
         <?php
-            if($JACKED->Sessions->check('create-score.succeeded') && !$JACKED->Sessions->read('create-score.succeeded')){
+            if($JACKED->Sessions->check('create-score.succeeded') && $JACKED->Sessions->read('create-score.succeeded') == 'false'){
         ?>
         <div class="alert alert-danger alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -25,7 +25,7 @@
             }
         ?>
         <?php
-            if($JACKED->Sessions->check('create-score.succeeded') && $JACKED->Sessions->read('create-score.succeeded')){
+            if($JACKED->Sessions->check('create-score.succeeded') && $JACKED->Sessions->read('create-score.succeeded') == 'true'){
         ?>
         <div class="alert alert-success alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

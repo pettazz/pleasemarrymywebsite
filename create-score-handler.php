@@ -13,9 +13,9 @@
     $score->Scorer = $me['userid'];
     $score->save();
     
-    $JACKED->Sessions->write('create-score.succeeded', True);
+    $JACKED->Sessions->write('create-score.succeeded', 'true');
   }catch(Exception $e){
-    $JACKED->Sessions->write('create-score.succeeded', False);
+    $JACKED->Sessions->write('create-score.succeeded', 'false');
     $JACKED->Sessions->write('create-score.failed-reason', $e->getMessage());
   }
 
