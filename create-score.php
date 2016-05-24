@@ -5,7 +5,7 @@
   require('form_body_top.php');
 
   $week = $_GET['week'];
-  $boys = $JACKED->Syrup->Contestant->find(array('alive' => 1));
+  $boys = $JACKED->Syrup->Contestant->find(array('alive' => 1), array('field' => 'name', 'direction' => 'ASC'));
   $actions = $JACKED->Syrup->Action->find(NULL, array('field' => 'name', 'direction' => 'ASC'));
   $actionGroups = array(
     'ACTION' => array(),
