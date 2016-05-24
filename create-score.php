@@ -39,7 +39,7 @@
 
         <label for="inputEpisode" class="">When it do?</label>
         <select id="inputEpisode" class="form-control input-lg" readonly name="inputEpisode">
-          <option value="<?php echo $week; ?>"><?php echo $week; ?></option>
+          <option value="<?php echo $week; ?>">Week <?php echo $week; ?></option>
         </select>
 
         <label for="inputContestant" class="">Who chyaboi?</label>
