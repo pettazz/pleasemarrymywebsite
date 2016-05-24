@@ -8,6 +8,7 @@
         protected $name = array(SyrupField::VARCHAR, 127);
         protected $description = array(SyrupField::VARCHAR, 255, True);
         protected $value = array(SyrupField::INT, 2, False);
+        protected $tag = array(SyrupField::ENUM, "ENUM('ACTION','CONVERSATION','FUCKERY','NEGATIVE','HOMETOWNS','FANTASY_SUITE','FINALE')", false, 'ACTION');
 
     }
     

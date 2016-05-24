@@ -1,9 +1,10 @@
 -- Create syntax for TABLE 'Action'
 CREATE TABLE `Action` (
   `uuid` varchar(64) NOT NULL DEFAULT '',
-  `name` varchar(127) NOT NULL DEFAULT '',
-  `description` varchar(255) DEFAULT '',
+  `name` varchar(128) NOT NULL DEFAULT '',
+  `description` varchar(256) DEFAULT '',
   `value` int(2) NOT NULL,
+  `tag` enum('ACTION','CONVERSATION','FUCKERY','NEGATIVE','HOMETOWNS','FANTASY_SUITE','FINALE') NOT NULL DEFAULT 'ACTION',
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
