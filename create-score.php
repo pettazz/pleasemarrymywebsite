@@ -58,16 +58,28 @@
           <?php
             foreach($actions as $action){
           ?>
-            <option value="<?php echo $action->uuid; ?>"><?php echo $action->name ?></option>
+            <option value="<?php echo $action->uuid; ?>" data-description="<?php echo htmlentities($action->description); ?>" data-value="<?php echo $action->value; ?>"><?php echo $action->name ?></option>
           <?php
             }
           ?>
         </select>
+        <span id="scoreDescription" class="help-block"></span>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
         <a class="btn btn-lg btn-warning btn-block" href="scoring.php">Done Scoring</a>
       </form>
 
+      <script type="text/css">
+        
+      </script>
+
 <?php
-  require('form_body_bottom.php');
+  $jsFooter = "$('#inputAction').change(function(){
+          var desc = $(this).find('option:selected').data('description');
+          if(desc.length === 0){
+            desc = '<span class=\"text-muted\">no description</span>'
+          }
+          $('#scoreDescription').html('<p><strong>' + $(this).find('option:selected').data('value') + ' points:</strong> ' + desc + '</p>');
+        });";
+  require('body_bottom.php');
 ?>

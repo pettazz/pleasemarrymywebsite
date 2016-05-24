@@ -25,5 +25,5 @@
       </form>
 
 <?php
-  require('form_body_bottom.php');
+  require('body_bottom.php');
 ?>
