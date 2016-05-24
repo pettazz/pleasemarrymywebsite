@@ -6,7 +6,19 @@
 
   $week = $_GET['week'];
   $boys = $JACKED->Syrup->Contestant->find(array('alive' => 1));
-  $actions = $JACKED->Syrup->Action->find(NULL, array('field' => 'tag', 'direction' => 'ASC'));
+  $actions = $JACKED->Syrup->Action->find(NULL, array('field' => 'name', 'direction' => 'ASC'));
+  $actionGroups = array(
+    'ACTION' => array(),
+    'CONVERSATION' => array(),
+    'FUCKERY' => array(),
+    'NEGATIVE' => array(),
+    'HOMETOWNS' => array(),
+    'FANTASY_SUITE' => array(),
+    'FINALE' => array()
+  );
+  foreach($actions as $action){
+    $actionGroups[$action->tag][] = $action;
+  }
 ?>
 
       <form class="form-signin" action="create-score-handler.php" method="POST">
@@ -44,6 +56,7 @@
 
         <label for="inputContestant" class="">Who chyaboi?</label>
         <select id="inputContestant" class="form-control input-lg" name="inputContestant">
+          <option disabled selected value></option>
           <?php
             foreach($boys as $boy){
           ?>
@@ -55,11 +68,19 @@
 
         <label for="inputAction" class="">O shit what he done now?</label>
         <select id="inputAction" class="form-control input-lg" name="inputAction" required>
+          <optgroup><option disabled selected value></option></optgroup>
           <?php
-            foreach($actions as $action){
+            foreach($actionGroups as $tagName => $actionGroup){
           ?>
-            <option value="<?php echo $action->uuid; ?>" data-description="<?php echo htmlentities($action->description); ?>" data-value="<?php echo $action->value; ?>"><?php echo $action->name ?></option>
+            <optgroup label="<?php echo $tagName; ?>">
+            <?php
+              foreach($actionGroup as $action){
+            ?>
+              <option value="<?php echo $action->uuid; ?>" data-description="<?php echo htmlentities($action->description); ?>" data-value="<?php echo $action->value; ?>"><?php echo $action->name ?></option>
           <?php
+              }
+            echo '
+            </opgroup>';
             }
           ?>
         </select>
@@ -74,12 +95,13 @@
       </script>
 
 <?php
-  $jsFooter = "$('#inputAction').change(function(){
+  $jsFooter = "var updateDescriptionHelp = function(){
           var desc = $(this).find('option:selected').data('description');
-          if(desc.length === 0){
+          if(desc && desc.length === 0){
             desc = '<span class=\"text-muted\">no description</span>'
           }
           $('#scoreDescription').html('<p><strong>' + $(this).find('option:selected').data('value') + ' points:</strong> ' + desc + '</p>');
-        });";
+        };
+        $('#inputAction').change(updateDescriptionHelp);";
   require('body_bottom.php');
 ?>
