@@ -75,8 +75,11 @@
       }
     }
 
-    public function getScoresForContestant($contestant){
-      return $this->jacked->Syrup->Score->find(array('Contestant' => $contestant));
+    public function getScoresForContestant($contestant, $ordered = False){
+      if($ordered && $ordered == 'episode'){
+        $order = array('field' => 'episode', 'direction' => 'DESC');
+      }
+      return $this->jacked->Syrup->Score->find(array('Contestant' => $contestant), $order);
     }
 
     public function getTeams($ordered = 'alpha'){

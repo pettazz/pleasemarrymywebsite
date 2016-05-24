@@ -25,7 +25,7 @@
   $brain = new Bach($JACKED);
 
   $total = $brain->getScoreForContestant($contestantID);
-  $scores = $brain->getScoresForContestant($contestantID);
+  $scores = $brain->getScoresForContestant($contestantID, 'episode');
   $alive = $contestant->alive > 0;
 
 ?>
