@@ -21,10 +21,7 @@
   $ep = $brain->getCurrentEpisode();
   $teams = $brain->getTeams('rank');
 ?>
-      <div class="jumbotron">
-        <h1>WEEK <?php echo $ep->id; ?></h1>
-        <p><?php echo date('l, d M Y g:i A', $ep->startTime); ?></p>
-      </div>
+      <img src="/assets/img/header.png" class="img-responsive" />
 
       <h2>Team Standings</h2>
 
