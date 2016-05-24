@@ -97,7 +97,7 @@
 <?php
   $jsFooter = "var updateDescriptionHelp = function(){
           var desc = $(this).find('option:selected').data('description');
-          if(desc && desc.length === 0){
+          if(!desc || desc.length === 0){
             desc = '<span class=\"text-muted\">no description</span>'
           }
           $('#scoreDescription').html('<p><strong>' + $(this).find('option:selected').data('value') + ' points:</strong> ' + desc + '</p>');
