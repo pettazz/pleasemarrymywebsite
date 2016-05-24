@@ -8,6 +8,7 @@
     $action->name = $_POST['inputName'];
     $action->description = $_POST['inputDescription'];
     $action->value = $_POST['inputValue'];
+    $action->tag = $_POST['inputTag'];
     $action->save();
     
     $succeeded = True;

@@ -34,6 +34,17 @@
         <label for="inputValue" class="sr-only">Value</label>
         <input type="text" id="inputValue" name="inputValue" class="form-control" placeholder="Value" required>
 
+        <label for="inputTag" class="">Tag</label>
+        <select id="inputTag" class="form-control input-lg" name="inputTag">
+          <option value="ACTION">ACTION</option>
+          <option value="CONVERSATION">CONVERSATION</option>
+          <option value="FUCKERY">FUCKERY</option>
+          <option value="NEGATIVE">NEGATIVE</option>
+          <option value="HOMETOWNS">HOMETOWNS</option>
+          <option value="FANTASY_SUITE">FANTASY_SUITE</option>
+          <option value="FINALE">FINALE</option>
+        </select>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
       </form>
 

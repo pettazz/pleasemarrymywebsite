@@ -18,7 +18,7 @@
   require('Bach.php');
   $brain = new Bach($JACKED);
 
-  $actions = $JACKED->Syrup->Action->find();
+  $actions = $JACKED->Syrup->Action->find(NULL, array('field' => 'tag', 'direction' => 'ASC'));
   $weeks = $JACKED->Syrup->Episode->find(NULL, array('field' => 'id', 'direction' => 'DESC'));
   $currentWeek = $brain->getCurrentEpisode();
 
@@ -55,6 +55,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Value</th>
+            <th>Tag</th>
           </tr>
         </thead>
         <tbody>
@@ -66,6 +67,7 @@
             <td><?php echo $action->name; ?></td>
             <td><?php echo $action->description; ?></td>
             <td><?php echo (($action->value > 0)? '+' : '') . $action->value; ?></td>
+            <td><?php echo $action->tag; ?></td>
           </tr>
           <?php
             }
