@@ -18,6 +18,11 @@
     header("Location: league.php");
   }
   
+  $me = $JACKED->Flock->getUserSession();
+  if($team->Owner->guid == $me['userid']){
+    header("Location: team.php");
+  }
+  
   $page = 'league';
   require('body_top.php');
 
