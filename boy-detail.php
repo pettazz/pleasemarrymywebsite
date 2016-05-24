@@ -62,7 +62,7 @@
           <?php
             }else{
           ?>
-          <a class="btn btn-warning" aria-label="Kill Boy" href="alter-boy.php?action=resurrect&boy=<?php echo $contestant->uuid; ?>">
+          <a class="btn btn-warning" aria-label="Rez Boy" href="alter-boy.php?action=resurrect&boy=<?php echo $contestant->uuid; ?>">
             <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
             Did you fuck up and he's definitely not dead?
           </a>
