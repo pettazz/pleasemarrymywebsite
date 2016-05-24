@@ -144,6 +144,14 @@
       }
     }
 
+    public function getAvailableContestantsForEpisode($episode){
+      $res = $this->jacked->Syrup->Contestant->find(array('AND' => array(
+        'alive' => 1,
+        'uuid NOT IN (SELECT Contestant FROM Ownership WHERE episode = ? GROUP BY Contestant HAVING COUNT(uuid) >= 2)' => $episode
+      )), array('field' => 'name', 'direction' => 'ASC'));
+      return $res;
+    }
+
   }
 
 ?>

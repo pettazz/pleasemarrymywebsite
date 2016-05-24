@@ -30,6 +30,7 @@
   $currentWeek = $brain->getCurrentEpisode();
 
 ?>
+      <!-- edit team notifications-->
       <?php
           if($JACKED->Sessions->check('alter-team.succeeded') && $JACKED->Sessions->read('alter-team.succeeded') == 'false'){
       ?>
@@ -56,6 +57,36 @@
             $JACKED->Sessions->delete('alter-team.succeeded');
           }
       ?>
+      <!-- /edit team notifications-->
+
+      <!-- add boy notifications-->
+      <?php
+          if($JACKED->Sessions->check('create-ownership.succeeded') && $JACKED->Sessions->read('create-ownership.succeeded') == 'false'){
+      ?>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+        <strong>Be cool.</strong> <?php echo $JACKED->Sessions->read('create-ownership.failed-reason'); ?>
+      </div>
+      <?php
+            $JACKED->Sessions->delete('create-ownership.succeeded');
+            $JACKED->Sessions->delete('create-ownership.failed-reason');
+          }
+      ?>
+
+      <?php
+          if($JACKED->Sessions->check('create-ownership.succeeded') && $JACKED->Sessions->read('create-ownership.succeeded') == 'true'){
+      ?>
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+        <strong>Nice</strong> Boy added
+      </div>
+      <?php
+            $JACKED->Sessions->delete('create-ownership.succeeded');
+          }
+      ?>
+      <!-- /add boy notifications-->
 
       <div class="jumbotron">
         <h1><?php echo $team->name; ?></h1>
@@ -70,6 +101,8 @@
       <?php 
         $weekidx = $currentWeek->id;
         while($weekidx > 0){ 
+          $week = $JACKED->Syrup->Episode->findOne(array('id' => $weekidx));
+          $weekEditable = $week->id == 1 || $week->startTime > time();
           $weekOwnerships = $JACKED->Syrup->Ownership->find(array('AND' => array('Team' => $team->uuid, 'episode' => $weekidx)));
           $weekScore = $brain->getScoreForTeamByEpisode($team->uuid, $weekidx);
       ?>
@@ -77,6 +110,18 @@
         Week <?php echo $weekidx; ?><br />
         <small>Score: <?php echo $weekScore; ?></small>
       </h3>
+
+      <?php
+        if(count($weekOwnerships) < $week->teamSize && $weekEditable){
+      ?>
+          <a class="btn btn-sm btn-success" aria-label="Add Boy" href="create-ownership.php?week=<?php echo $weekidx; ?>">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            Add a Boy
+          </a>
+      <?php
+        }
+      ?>
+
       <table class="table table-striped table-hover">
         <thead>
           <tr>
