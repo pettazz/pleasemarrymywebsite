@@ -58,11 +58,26 @@
       }
     }
 
+    public function getScoreForContestantByEpisode($contestant, $episode){
+      $query = "SELECT SUM(Action.value) AS score FROM Action, Score WHERE 
+        Score.Contestant = '" . $contestant . "' AND 
+        Score.episode = " . $episode . " AND
+        Action.uuid = Score.Action";
+      $result = $this->jacked->MySQL->query($query);
+      if($result){
+        if($result[0]['score'] > 0){
+          return $result[0]['score'];
+        }else{
+          return 0;
+        }
+      }else{
+        return 0;
+      }
+    }
+
     public function getScoresForContestant($contestant){
       return $this->jacked->Syrup->Score->find(array('Contestant' => $contestant));
     }
-
-
 
     public function getTeams($ordered = 'alpha'){
       $res = array();
@@ -91,6 +106,26 @@
       $query = "SELECT SUM(Action.value) AS score FROM Ownership, Action, Score WHERE 
         Ownership.Team = '" . $team . "' AND
         Score.Contestant = Ownership.Contestant AND
+        Score.episode = Ownership.episode AND
+        Action.uuid = Score.Action";
+
+      $result = $this->jacked->MySQL->query($query);
+      if($result){
+        if($result[0]['score'] > 0){
+          return $result[0]['score'];
+        }else{
+          return 0;
+        }
+      }else{
+        return 0;
+      }
+    }
+
+    public function getScoreForTeamByEpisode($team, $episode){
+      $query = "SELECT SUM(Action.value) AS score FROM Ownership, Action, Score WHERE 
+        Ownership.Team = '" . $team . "' AND
+        Score.Contestant = Ownership.Contestant AND
+        Score.episode = " . $episode . " AND
         Score.episode = Ownership.episode AND
         Action.uuid = Score.Action";
 
