@@ -29,6 +29,20 @@
   $alive = $contestant->alive > 0;
 
 ?>
+
+      <?php 
+        if(isset($failedToKillBoy) && $failedToKillBoy){
+      ?>
+
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+        <strong>Oh dip!</strong> Unable to alter Boy state
+      </div>
+
+      <?php
+        }
+      ?>
       
       <div class="jumbotron">
         <h1><?php echo $contestant->name; ?></h1>

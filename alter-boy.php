@@ -11,7 +11,7 @@
     
     $succeeded = True;
   }catch(Exception $e){
-    $failedToKillBoy = True;
+    $failedToAlterBoy = True;
     print_r($e);
   }
 
