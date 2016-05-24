@@ -26,12 +26,17 @@
 
   $total = $brain->getScoreForContestant($contestantID);
   $scores = $brain->getScoresForContestant($contestantID);
+  $alive = $contestant->alive > 0;
 
 ?>
       
       <div class="jumbotron">
         <h1><?php echo $contestant->name; ?></h1>
         <p>Total Score: <?php echo $total; ?></p>
+        <p>
+          <span class="glyphicon glyphicon-<?php echo $alive ? 'sunglasses' : 'trash'; ?>" aria-hidden="true"></span>
+          <?php echo $alive ? 'Still alive' : 'Dead to us'; ?>
+        </p>
       </div>
 
 
