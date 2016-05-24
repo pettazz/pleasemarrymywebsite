@@ -37,6 +37,25 @@
           <span class="glyphicon glyphicon-<?php echo $alive ? 'sunglasses' : 'trash'; ?>" aria-hidden="true"></span>
           <?php echo $alive ? 'Still alive' : 'Dead to us'; ?>
         </p>
+        <p>
+          <?php 
+            if($alive){
+          ?>
+          <a class="btn btn-danger" aria-label="Kill Boy" href="alter-boy.php?action=kill&boy=<?php echo $contestant->uuid; ?>">
+            <span class="glyphicon glyphicon-eject" aria-hidden="true"></span>
+            Did he died?
+          </a>
+          <?php
+            }else{
+          ?>
+          <a class="btn btn-warning" aria-label="Kill Boy" href="alter-boy.php?action=resurrect&boy=<?php echo $contestant->uuid; ?>">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+            Did you fuck up and he's definitely not dead?
+          </a>
+          <?php 
+            }
+          ?>
+        </p>
       </div>
 
 
