@@ -18,7 +18,7 @@
     <![endif]-->
 
     <style type="text/css">
-      tr.contestant-link:hover{
+      tr.clickable:hover{
         cursor: pointer;
       }
     </style>

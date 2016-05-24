@@ -37,7 +37,7 @@
               $score = $contestantData['score'];
           ?>
 
-          <tr class="contestant-link" data-contestant-id="<?php echo $contestant->uuid; ?>">
+          <tr class="contestant-link clickable" data-contestant-id="<?php echo $contestant->uuid; ?>">
             <td><?php echo $contestant->name; ?></td>
             <td><?php echo $score; ?></td>
             <td><?php echo ($contestant->alive > 0)? 'YUP' : 'NAW'; ?></td>

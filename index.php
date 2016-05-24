@@ -45,8 +45,8 @@
               $score = $teamData['score'];
           ?>
 
-          <tr class="team-link" data-team-id="<?php echo $team->uuid; ?>">
-            <td>#<php echo $rank; ?></td>
+          <tr class="team-link clickable" data-team-id="<?php echo $team->uuid; ?>">
+            <td>#<?php echo $rank; ?></td>
             <td><?php echo $team->name; ?></td>
             <td><?php echo $score; ?></td>
             <td><?php echo $team->Owner->username; ?></td>
@@ -60,5 +60,10 @@
       </table>
 
 <?php
+
+  $jsFooter = '
+        $(\'tr.team-link\').click(function(){
+          document.location = \'team-detail.php?team=\' + $(this).data(\'team-id\');
+        });';
   require('body_bottom.php');
 ?>
