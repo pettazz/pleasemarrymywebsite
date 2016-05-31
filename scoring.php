@@ -20,7 +20,6 @@
 
   $actions = $JACKED->Syrup->Action->find(NULL, array('field' => 'tag', 'direction' => 'ASC'));
   $weeks = $JACKED->Syrup->Episode->find(NULL, array('field' => 'id', 'direction' => 'DESC'));
-  $currentWeek = $brain->getCurrentEpisode();
 
 ?>
       <div class="panel panel-primary">

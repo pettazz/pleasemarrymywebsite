@@ -30,7 +30,7 @@
   $brain = new Bach($JACKED);
 
   $total = $brain->getScoreForTeam($teamID);
-  $currentWeek = $brain->getCurrentEpisode();
+  $currentWeek = $brain->getLatestEpisode();
 
 ?>
       

@@ -27,7 +27,7 @@
   $brain = new Bach($JACKED);
 
   $total = $brain->getScoreForTeam($team->uuid);
-  $currentWeek = $brain->getCurrentEpisode();
+  $currentWeek = $brain->getLatestEpisode();
 
 ?>
       <!-- edit team notifications-->

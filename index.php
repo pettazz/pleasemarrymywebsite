@@ -18,7 +18,6 @@
   $page = 'league';
   require('body_top.php');
 
-  $ep = $brain->getCurrentEpisode();
   $teams = $brain->getTeams('rank');
 ?>
       <img src="/assets/img/header.png" class="img-responsive" />

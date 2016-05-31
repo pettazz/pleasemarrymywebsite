@@ -10,9 +10,23 @@
       $this->jacked->loadDependencies(array('Syrup', 'MySQL'));
     }
 
-    public function getCurrentEpisode(){
-      $now = time();
-      return $this->jacked->Syrup->Episode->findOne(array('startTime > ?' => $now), array('field' => 'id', 'direction' => 'ASC'));
+    public function getLatestEpisodeID(){
+      $query = "SELECT MAX(id) AS id FROM Episode";
+      $result = $this->jacked->MySQL->query($query);
+      if($result){
+        if($result[0]['id'] > 0){
+          return $result[0]['id'];
+        }else{
+          return 1;
+        }
+      }else{
+        return 1;
+      }
+    }
+
+    public function getLatestEpisode(){
+      $epid = $this->getLatestEpisodeID();
+      return $this->jacked->Syrup->Episode->findOne(array('id = ?' => $epid), array('field' => 'id', 'direction' => 'ASC'));
     }
 
     public function getContestants($ordered = 'alpha', $aliveOnly = False){
