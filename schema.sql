@@ -46,5 +46,6 @@ CREATE TABLE `Team` (
   `uuid` varchar(64) NOT NULL DEFAULT '',
   `Owner` varchar(64) NOT NULL DEFAULT '',
   `name` varchar(255) NOT NULL DEFAULT '',
+  `avatar` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

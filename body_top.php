@@ -18,8 +18,12 @@
     <![endif]-->
 
     <style type="text/css">
-      tr.clickable:hover{
+      .clickable:hover{
         cursor: pointer;
+        background-color: #eee;
+      }
+      .jumbotron .img-responsive{
+        width: 100%;
       }
     </style>
   </head>

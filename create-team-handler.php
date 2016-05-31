@@ -23,6 +23,7 @@
         $team->Owner = $meID;
     }
     $team->name = $_POST['inputName'];
+    $team->avatar = isset($_POST['inputAvatar'])? $_POST['inputAvatar'] : 'NULL';
     $team->save();
     
     $JACKED->Sessions->write('alter-team.succeeded', 'true');

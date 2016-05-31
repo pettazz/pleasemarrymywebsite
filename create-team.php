@@ -42,6 +42,9 @@
         <label for="inputName" class="sr-only">Team Name</label>
         <input type="text" id="inputName" name="inputName" class="form-control" placeholder="Name" required autofocus value="<?php echo $existingTeam? $team->name : ''; ?>">
 
+        <label for="inputAvatar" class="sr-only">Team Icon</label>
+        <input type="text" id="inputAvatar" name="inputAvatar" class="form-control" placeholder="Icon URL" autofocus value="<?php echo $existingTeam? $team->avatar : ''; ?>">
+
         <?php
           if($existingTeam){
         ?>

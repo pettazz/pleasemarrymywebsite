@@ -23,42 +23,34 @@
       <img src="/assets/img/header.png" class="img-responsive" />
 
       <h2>Team Standings</h2>
+      <?php
+        $rank = 1;
+        foreach($teams as $teamData){
+          $team = $teamData['team'];
+          $score = $teamData['score'];
+      ?>
 
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Score</th>
-            <th>Owner</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-            $rank = 1;
-            foreach($teams as $teamData){
-              $team = $teamData['team'];
-              $score = $teamData['score'];
-          ?>
-
-          <tr class="team-link clickable" data-team-id="<?php echo $team->uuid; ?>">
-            <td>#<?php echo $rank; ?></td>
-            <td><?php echo $team->name; ?></td>
-            <td><?php echo $score; ?></td>
-            <td><?php echo $team->Owner->username; ?></td>
-          </tr>
-          <?php
-              $rank++;
-            }
-          ?>
-
-        </tbody>
-      </table>
+        <div class="team-link media clickable" data-team-id="<?php echo $team->uuid; ?>">
+          <div class="media-left">
+            <h2>#<?php echo $rank; ?></h2>
+          </div>
+          <div class="media-left">
+            <img width="100px" class="media-object" src="<?php echo $team->avatar; ?>" >
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading"><?php echo $team->name; ?> <small><?php echo $score; ?></small></h4>
+            <?php echo $team->Owner->username; ?>
+          </div>
+        </div>
+      <?php
+          $rank++;
+        }
+      ?>
 
 <?php
 
   $jsFooter = '
-        $(\'tr.team-link\').click(function(){
+        $(\'.team-link\').click(function(){
           document.location = \'team-detail.php?team=\' + $(this).data(\'team-id\');
         });';
   require('body_bottom.php');

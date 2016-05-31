@@ -35,8 +35,15 @@
 ?>
       
       <div class="jumbotron">
-        <h1><?php echo $team->name; ?></h1>
-        <p>Total Score: <?php echo $total; ?></p>
+        <div class="row">
+          <div class="col-md-5">
+            <img class="img-responsive" src="<?php echo $team->avatar; ?>" />
+          </div>
+          <div class="col-md-7">
+            <h1><?php echo $team->name; ?></h1>
+            <p>Total Score: <?php echo $total; ?></p>
+          </div>
+        </div>
       </div>
 
       <?php 

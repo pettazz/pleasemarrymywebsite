@@ -145,15 +145,23 @@
           }
       ?>
       <!-- /redraft notifications-->
-
+      
       <div class="jumbotron">
-        <h1><?php echo $team->name; ?></h1>
-        <p>Total Score: <?php echo $total; ?></p>
-
-        <a class="btn btn-info" aria-label="Edit Team" href="create-team.php?team=<?php echo $team->uuid; ?>">
-          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-          Edit Details
-        </a>
+        <div class="row">
+          <div class="col-md-5">
+            <img class="img-responsive" src="<?php echo $team->avatar; ?>" />
+          </div>
+          <div class="col-md-7">
+            <h1><?php echo $team->name; ?></h1>
+            <p>Total Score: <?php echo $total; ?></p>
+            <p>
+              <a class="btn btn-info" aria-label="Edit Team" href="create-team.php?team=<?php echo $team->uuid; ?>">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                Edit Details
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
 
       <?php 
