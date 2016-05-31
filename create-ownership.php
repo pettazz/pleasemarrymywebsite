@@ -28,16 +28,9 @@
           <option disabled selected value></option>
           <?php
             foreach($contestants as $contestant){
-              $existingOwnership = $JACKED->Syrup->Ownership->find(array('AND' => array(
-                'Team' => $myTeam->uuid,
-                'Contestant' => $contestant->uuid,
-                'episode' => $_GET['week']
-              )));
-              if(count($existingOwnership) == 0){
           ?>
             <option value="<?php echo $contestant->uuid; ?>"><?php echo $contestant->name ?></option>
           <?php
-              }
             }
           ?>
         </select>
