@@ -7,7 +7,7 @@
 
     public function __construct($JACKED){
       $this->jacked = $JACKED;
-      $this->jacked->loadDependencies(array('Syrup', 'MySQL'));
+      $this->jacked->loadDependencies(array('Syrup', 'MySQL', 'Sessions'));
     }
 
     public function getLatestEpisodeID(){
@@ -159,12 +159,21 @@
     }
 
     public function getAvailableContestantsForEpisode($episode){
+      $me = $this->jacked->Flock->getUserSession();
+      $meID = $me['userid'];
+      $myTeam = $this->jacked->Syrup->Team->findOne(array('Owner' => $meID));
       $res = $this->jacked->Syrup->Contestant->find(array('AND' => array(
         'alive' => 1,
-        'uuid NOT IN (SELECT Contestant FROM Ownership WHERE episode = ? GROUP BY Contestant HAVING COUNT(uuid) >= 2)' => $episode,
-        'uuid NOT IN (SELECT Contestant FROM Ownership WHERE episode = ? GROUP BY Contestant HAVING COUNT(uuid) >= 2)' => $episode - 1
+        'uuid NOT IN (SELECT Contestant FROM Ownership WHERE episode = ? AND Team = "' . $myTeam->uuid . '")' => $episode,
+        'uuid NOT IN (SELECT Contestant FROM Ownership WHERE episode = ? AND Team = "' . $myTeam->uuid . '" GROUP BY Contestant HAVING COUNT(uuid) >= 2)' => $episode,
+        'uuid NOT IN (SELECT Contestant FROM Ownership WHERE episode = ? AND Team <> "' . $myTeam->uuid . '" GROUP BY Contestant HAVING COUNT(uuid) >= 2)' => $episode - 1
       )), array('field' => 'name', 'direction' => 'ASC'));
       return $res;
+    }
+
+    public function isTeamInLastPlace($team){
+      $teams = $this->getTeams('rank');
+      return array_search($team, array_keys($teams)) == count($teams) - 1;
     }
 
   }

@@ -1,7 +1,7 @@
 <?php
 
   require('JACKED/jacked_conf.php');
-  $JACKED = new JACKED(array('Syrup', 'Flock'));
+  $JACKED = new JACKED(array('Syrup', 'Sessions', 'Flock'));
 
   try{
     $JACKED->Flock->requireLogin();
@@ -117,6 +117,35 @@
       ?>
       <!-- /save lineup notifications-->
 
+      <!-- redraft notifications-->
+      <?php
+          if($JACKED->Sessions->check('delete-lineup.succeeded') && $JACKED->Sessions->read('delete-lineup.succeeded') == 'false'){
+      ?>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+        <strong>Be cool.</strong> <?php echo $JACKED->Sessions->read('delete-lineup.failed-reason'); ?>
+      </div>
+      <?php
+            $JACKED->Sessions->delete('delete-lineup.succeeded');
+            $JACKED->Sessions->delete('delete-lineup.failed-reason');
+          }
+      ?>
+
+      <?php
+          if($JACKED->Sessions->check('delete-lineup.succeeded') && $JACKED->Sessions->read('delete-lineup.succeeded') == 'true'){
+      ?>
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+        <strong>Nice</strong> Redraft enabled
+      </div>
+      <?php
+            $JACKED->Sessions->delete('delete-lineup.succeeded');
+          }
+      ?>
+      <!-- /redraft notifications-->
+
       <div class="jumbotron">
         <h1><?php echo $team->name; ?></h1>
         <p>Total Score: <?php echo $total; ?></p>
@@ -135,7 +164,8 @@
           $weekOwnerships = $JACKED->Syrup->Ownership->find(array('AND' => array('Team' => $team->uuid, 'episode' => $weekidx)));
           $weekComplete = count($weekOwnerships) == $week->teamSize;
           $weekScore = $brain->getScoreForTeamByEpisode($team->uuid, $weekidx);
-          if(!$weekComplete && $weekidx == $currentWeek->id){
+          $redrafting = $JACKED->Sessions->check('lineup-redraft-enabled') && $JACKED->Sessions->read('lineup-redraft-enabled') == 'true';
+          if(!$redrafting && !$weekComplete && $weekidx == $currentWeek->id){
             $inheritedOwnerships = $JACKED->Syrup->Ownership->find(array('AND' => array('Contestant.alive' => 1, 'Team' => $team->uuid, 'episode' => $weekidx - 1)));
           }else{
             $inheritedOwnerships = array();
@@ -159,11 +189,22 @@
       ?>
 
       <?php
-        if($weekFilled && $weekEditable){
+        if(!$weekComplete && $weekFilled && $weekEditable){
       ?>
           <a class="btn btn-sm btn-primary" aria-label="Save Lineup" href="create-lineup-handler.php?week=<?php echo $weekidx; ?>&team=<?php echo $team->uuid; ?>">
             <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
             Save Lineup
+          </a>
+      <?php
+        }
+      ?>
+
+      <?php
+        if($brain->isTeamInLastPlace($team->uuid) && $weekEditable && $weekidx == $currentWeek->id){
+      ?>
+          <a class="btn btn-sm btn-danger" aria-label="Delete Team" href="delete-lineup-handler.php?week=<?php echo $weekidx; ?>&team=<?php echo $team->uuid; ?>">
+            <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+            Delete Team and Redraft
           </a>
       <?php
         }
