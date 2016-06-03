@@ -23,11 +23,13 @@
 
   require('Bach.php');
   $brain = new Bach($JACKED);
+  $latestEpisode = $brain->getLatestEpisodeID();
 
   $total = $brain->getScoreForContestant($contestantID);
   $scores = $brain->getScoresForContestant($contestantID, 'episode');
   $alive = $contestant->alive > 0;
-
+  $ownerships = $JACKED->Syrup->Ownership->find(array('AND' => 
+    array('Contestant' => $contestantID, 'episode' => $latestEpisode)))
 ?>
 
       <?php 
@@ -79,6 +81,27 @@
         </div>
       </div>
 
+      <?php
+        if(count($ownerships) > 0){
+      ?>
+          <h2>Week <?php echo $latestEpisode; ?> Owners</h2>
+      <?php
+          foreach($ownerships as $ownership){
+            $team = $ownership->Team;
+      ?>
+
+        <div class="team-link media clickable" data-team-id="<?php echo $team->uuid; ?>">
+          <div class="media-left">
+            <img width="100px" class="media-object" src="<?php echo $team->avatar; ?>" >
+          </div>
+          <div class="media-body">
+            <h1 class="media-heading"><?php echo $team->name; ?></h1>
+          </div>
+        </div>
+      <?php
+          }
+        }
+      ?>
 
       <h3>Scores</h3>
       <table class="table table-striped table-hover">
@@ -109,5 +132,9 @@
       </table>
 
 <?php
+  $jsFooter = '
+        $(\'.team-link\').click(function(){
+          document.location = \'team-detail.php?team=\' + $(this).data(\'team-id\');
+        });';
   require('body_bottom.php');
 ?>
