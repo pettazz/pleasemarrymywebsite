@@ -32,7 +32,7 @@
         ?>
 
         <li class="boy contestant-link clickable" data-contestant-id="<?php echo $contestant->uuid; ?>">
-          <img class="img-responsive img-circle" src="/assets/img/boys/<?php echo $contestant->uuid; ?>" />
+          <img class="img-responsive img-circle" src="/assets/img/boys/<?php echo $contestant->uuid; ?>.jpg" />
           <h3><?php echo $contestant->name; ?></h3>
           <h1><?php echo $score; ?></h1>
         </li>

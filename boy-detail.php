@@ -47,7 +47,7 @@
       <div class="jumbotron">
         <div class="row">
           <div class="col-md-5">
-            <img class="img-responsive" src="/assets/img/boys/<?php echo $contestant->uuid; ?>" />
+            <img class="img-responsive" src="/assets/img/boys/<?php echo $contestant->uuid; ?>.jpg" />
           </div>
           <div class="col-md-7">
             <h1><?php echo $contestant->name; ?></h1>
