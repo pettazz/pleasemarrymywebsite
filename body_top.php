@@ -25,6 +25,27 @@
       .jumbotron .img-responsive{
         width: 100%;
       }
+      .team-link.media{
+        padding: 10px;
+      }
+      .team-link .media-body h4{
+        margin: 0px;
+      }
+      .team-link .media-body h1{
+        margin: 0px;
+      }
+      ul#boys{
+        list-style-type: none;
+      }
+      li.boy{
+        background-color: #d9edf7;
+        width: 140px;
+        height: 270px;
+        margin: 5px;
+        padding: 15px;
+        float: left;
+        text-align: center;
+      }
     </style>
   </head>
   <body>

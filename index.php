@@ -38,8 +38,8 @@
             <img width="100px" class="media-object" src="<?php echo $team->avatar; ?>" >
           </div>
           <div class="media-body">
-            <h4 class="media-heading"><?php echo $team->name; ?> <small><?php echo $score; ?></small></h4>
-            <?php echo $team->Owner->username; ?>
+            <h4 class="media-heading"><?php echo $team->name; ?> <small><?php echo $team->Owner->username; ?></small></h4>
+            <h1><?php echo $score; ?></h1>
           </div>
         </div>
       <?php
