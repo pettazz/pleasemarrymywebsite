@@ -46,6 +46,9 @@
         float: left;
         text-align: center;
       }
+      #damn-daniel{
+        width:100%;
+      }
     </style>
   </head>
   <body>
