@@ -20,7 +20,7 @@
 
   $teams = $brain->getTeams('rank');
 ?>
-      <img src="/assets/img/daniel.jpg" id="damn-daniel" class="img-responsive" />
+      <img src="/assets/img/goocho.jpg" id="damn-daniel" class="img-responsive" />
 
       <h2>Team Standings</h2>
       <?php
